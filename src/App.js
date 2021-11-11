@@ -19,15 +19,20 @@ function App() {
 
   useEffect(() => {
     const getCoins = async () => {
-      const data = await axios.get('https://api.coinlore.net/api/tickers/')
-      setCoins(data.data.data)
+      try {
+        const resp = await axios.get('https://api.coinlore.net/api/tickers/')
+        const newCoins = resp.data.data
+        setCoins(newCoins)
+      } catch (err) {
+        console.log(err.message)
+      }
     }
     getCoins()
   }, [])
 
   return (
     <Router>
-      <CryptoData.Provider value={coins}>
+      <CryptoData.Provider value={{ coins }}>
         <Main>
           <Navbar />
           <Routes>

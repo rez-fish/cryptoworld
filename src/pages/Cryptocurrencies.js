@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import money from '../img/money.png'
 import Table from '../components/Table'
+import { CryptoData } from '../App'
+import { useContext } from 'react'
 
 const Main = styled.div`
   padding: 10rem 0;
@@ -37,6 +39,7 @@ const ImageContainer = styled.div`
 `
 
 const Cryptocurrencies = () => {
+  const { coins } = useContext(CryptoData)
   return (
     <>
       <Main>
@@ -49,7 +52,7 @@ const Cryptocurrencies = () => {
           <img src={money} alt='' />
         </ImageContainer>
       </Main>
-      <Table />
+      <Table coinTest={coins} />
     </>
   )
 }

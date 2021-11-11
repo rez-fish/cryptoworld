@@ -1,8 +1,9 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CryptoData } from '../App'
 import styled from 'styled-components'
 import millify from 'millify'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const CoinTable = styled.table`
   padding: 1rem;
@@ -47,6 +48,10 @@ const CoinTable = styled.table`
     font-size: 1.5rem;
   }
 
+  th:hover {
+    cursor: pointer;
+  }
+
   th,
   td {
     margin: 0;
@@ -64,40 +69,86 @@ const CoinTable = styled.table`
   }
 `
 
-const Table = () => {
-  const coins = useContext(CryptoData)
+const Table = ({ coinTest }) => {
+  const [displayed, setDisplayed] = useState([])
+  const [isNormalList, setIsNormalList] = useState(true)
+  const [isAlphabeticalList, setIsAlphabeticalList] = useState(false)
+  const { coins } = useContext(CryptoData)
+
+  const SortAlphabetical = (x, y) => {
+    if (x.name < y.name) {
+      return -1
+    }
+
+    if (x.name > y.name) {
+      return 1
+    }
+    return 0
+  }
+  const normalList = [...coins]
+  const alphabetList = [...coins].sort(SortAlphabetical)
 
   return (
     <div className='container'>
       {!coins && <h1>LOADING...</h1>}
-      {coins && (
+      {displayed && (
         <CoinTable>
           <thead>
             <tr>
               <th>#</th>
-              <th>Coin</th>
+              <th
+                onClick={() => {
+                  if (isNormalList === true) {
+                    setIsNormalList(false)
+                    setIsAlphabeticalList(true)
+                  } else {
+                    setIsNormalList(true)
+                    setIsAlphabeticalList(false)
+                  }
+                }}
+              >
+                Coin
+              </th>
               <th>Price</th>
               <th>Market Cap</th>
               <th>24hr</th>
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin) => (
-              <tr key={coin.id}>
-                <td>{coin.rank}</td>
-                <td>
-                  <Link to={`/coin/${coin.id}`}>
-                    {coin.name} ({coin.symbol})
-                  </Link>
-                </td>
-                <td>${millify(coin.price_usd, { precision: 10 })}</td>
-                <td>${millify(coin.market_cap_usd, { precision: 2 })}</td>
-                <td className={coin.percent_change_24h > 0 ? 'green' : 'red'}>
-                  {coin.percent_change_24h}%
-                  {coin.percent_change_24h > 0 ? '▲' : '▼'}
-                </td>
-              </tr>
-            ))}
+            {isNormalList &&
+              normalList.map((coin) => (
+                <tr key={coin.id}>
+                  <td>{coin.rank}</td>
+                  <td>
+                    <Link to={`/coin/${coin.id}`}>
+                      {coin.name} ({coin.symbol})
+                    </Link>
+                  </td>
+                  <td>${millify(coin.price_usd, { precision: 10 })}</td>
+                  <td>${millify(coin.market_cap_usd, { precision: 2 })}</td>
+                  <td className={coin.percent_change_24h > 0 ? 'green' : 'red'}>
+                    {coin.percent_change_24h}%
+                    {coin.percent_change_24h > 0 ? '▲' : '▼'}
+                  </td>
+                </tr>
+              ))}
+            {isAlphabeticalList &&
+              alphabetList.map((coin) => (
+                <tr key={coin.id}>
+                  <td>{coin.rank}</td>
+                  <td>
+                    <Link to={`/coin/${coin.id}`}>
+                      {coin.name} ({coin.symbol})
+                    </Link>
+                  </td>
+                  <td>${millify(coin.price_usd, { precision: 10 })}</td>
+                  <td>${millify(coin.market_cap_usd, { precision: 2 })}</td>
+                  <td className={coin.percent_change_24h > 0 ? 'green' : 'red'}>
+                    {coin.percent_change_24h}%
+                    {coin.percent_change_24h > 0 ? '▲' : '▼'}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </CoinTable>
       )}
