@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import money from '../img/money.png'
+import Table from '../components/Table'
 
 const Main = styled.div`
-  padding: 6rem 0;
+  padding: 10rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,24 +28,29 @@ const Title = styled.h1`
 const Message = styled.p`
   font-size: 3rem;
 `
+const Message2 = styled.p`
+  font-size: 1.8rem;
+`
 
 const ImageContainer = styled.div`
   border-radius: 50%;
 `
 
-const Image = styled.img``
-
 const Cryptocurrencies = () => {
   return (
-    <Main>
-      <TitleContainer>
-        <Title>Fill your bag, with the coins worth grabbing.</Title>
-        <Message>Find their worth in Crypto World</Message>
-      </TitleContainer>
-      <ImageContainer>
-        <Image src={money} alt='' />
-      </ImageContainer>
-    </Main>
+    <>
+      <Main>
+        <TitleContainer>
+          <Title>Fill your bag, with the coins worth grabbing.</Title>
+          <Message>Find their worth in Crypto World.</Message>
+          <Message2>Save time. View the top 100 coins!</Message2>
+        </TitleContainer>
+        <ImageContainer>
+          <img src={money} alt='' />
+        </ImageContainer>
+      </Main>
+      <Table />
+    </>
   )
 }
 

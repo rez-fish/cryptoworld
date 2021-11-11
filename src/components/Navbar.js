@@ -12,6 +12,8 @@ const Nav = styled.nav`
   padding: 2.5rem 0;
   padding-left: 10rem;
   padding-right: 10rem;
+  position: sticky;
+  top: 0;
 `
 
 const Menu = styled.ul`
