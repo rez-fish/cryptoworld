@@ -49,9 +49,6 @@ const Navbar = () => {
         <Link to='/' style={{ textDecoration: 'none' }}>
           <Item>Cryptocurrencies</Item>
         </Link>
-        <Link to='/exchanges' style={{ textDecoration: 'none' }}>
-          <Item margin={4}>Exchanges</Item>
-        </Link>
       </Menu>
     </Nav>
   )

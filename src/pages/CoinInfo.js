@@ -13,6 +13,7 @@ const Box = styled.div``
 const MainInfo = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 
   img {
     height: 8rem;

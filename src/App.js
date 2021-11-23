@@ -37,7 +37,6 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<Cryptocurrencies />} />
-            <Route path='/exchanges' element={<Exchanges />} />
             <Route path='/coin/:id' element={<CoinInfo />} />
           </Routes>
         </Main>
