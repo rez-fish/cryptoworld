@@ -69,7 +69,7 @@ const CoinTable = styled.table`
 `
 
 const Table = ({ coinTest }) => {
-  const [displayed, setDisplayed] = useState([])
+  const [displayed] = useState([])
   const [isNormalList, setIsNormalList] = useState(true)
   const [isAlphabeticalList, setIsAlphabeticalList] = useState(false)
   const { coins } = useContext(CryptoData)
