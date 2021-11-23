@@ -4,7 +4,6 @@ import Navbar from './components/Navbar'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Cryptocurrencies from './pages/Cryptocurrencies'
-import Exchanges from './pages/Exchanges'
 import axios from 'axios'
 import CoinInfo from './pages/CoinInfo'
 

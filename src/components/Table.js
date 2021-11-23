@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { CryptoData } from '../App'
 import styled from 'styled-components'
 import millify from 'millify'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 const CoinTable = styled.table`
   padding: 1rem;
